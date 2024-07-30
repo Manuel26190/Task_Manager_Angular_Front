@@ -1,0 +1,40 @@
+<div class="w-50 mx-auto">
+    <form
+        class="bg-dark-subtle mt-5 p-5 d-flex flex-column align-items-center w-100 row-gap-3"
+        [formGroup]="addTaskForm"
+        (ngSubmit)="onSubmit(id)"
+    >
+        <!-- Task_name -->
+        <div>
+            <label for="task_name"></label>
+            <input
+                type="text"
+                id="task_name"
+                placeholder="Titre"
+                formControlName="nom"
+                class="p-2"
+            />
+        </div>
+        <!-- description -->
+        <label for="description"></label>
+        <input
+            type="text"
+            id="description"
+            placeholder="Description"
+            formControlName="description"
+            class="p-2 w-100"
+        />
+
+        <!-- End date -->
+        <label for="end_date"></label>
+        <input
+            type="date"
+            id="end_date"
+            placeholder="Date"
+            formControlName="date"
+            class="p-2"
+        />
+
+        <button type="submit" class="btn btn-primary w-25 p-2">Ajouter</button>
+    </form>
+</div>

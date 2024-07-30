@@ -1,0 +1,53 @@
+<div class="w-50 mx-auto">
+    <form
+        class="p-5 w-75 bg-dark-subtle mt-5"
+        [formGroup]="loginForm"
+        (ngSubmit)="submit()"
+    >
+        <!-- email -->
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input type="email" class="form-control" formControlName="email" />
+            <!-- on verifie si le champ email a recu le focus au moins une fois et que l'utilisateur a taper ou pas quelque chose dedans pour pouvoir afficher l'erreur correspondante -->
+            <div
+                *ngIf="
+                    loginForm.get('email')?.invalid &&
+                    loginForm.get('email')?.touched
+                "
+            >
+                <p *ngIf="loginForm.get('email')?.errors?.['required']">
+                    l'Email est requis
+                </p>
+                <p *ngIf="loginForm.get('email')?.errors?.['email']">
+                    Format email invalide
+                </p>
+            </div>
+        </div>
+        <!-- mot de passe -->
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+                >Mot de passe</label
+            >
+            <input
+                type="password"
+                class="form-control"
+                formControlName="password"
+            />
+            <div
+                *ngIf="
+                    loginForm.get('password')?.invalid &&
+                    loginForm.get('password')?.touched
+                "
+            >
+                <p *ngIf="loginForm.get('password')?.errors?.['required']">
+                    Le mot de passe est requis
+                </p>
+                <p *ngIf="loginForm.get('password')?.errors?.['minlength']">
+                    Le mot de passe est trop court
+                </p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>

@@ -1,0 +1,49 @@
+<div>
+    <h1 class="text-center p-5 shadow mb-5">Mes Tâches</h1>
+</div>
+<div class="container">
+    <button routerLink="/add-task" class="btn btn-primary mb-3 bg-success">
+        Ajouter une tâche
+    </button>
+</div>
+<div
+    *ngFor="let task of listTasks"
+    class="shadow task-box d-flex align-items-center justify-content-between container border mb-5 border-dark"
+>
+    <div class="d-flex justify-content-around align-items-center w-100">
+        <button
+            (click)="completeTask(task.id)"
+            class="m-0 p-2 border rounded-circle p-1 bg-green"
+        >
+            <i class="fa-solid fa-check"></i>
+        </button>
+        <p
+            [ngClass]="
+                getTaskStatusClass(task.statut) + ' m-0 p-3 w-25 fw-bold'
+            "
+        >
+            {{ task.task_name }}
+        </p>
+        <p class="m-0 w-25 p-1">{{ task.description }}</p>
+        <p class="end-date m-0 p-1">{{ task.end_date }}</p>
+        <p
+            class="statut-task m-0 p-1 fw-bold"
+            [ngClass]="{
+                'in-progress': task.statut === 'in progress',
+                expired: task.statut === 'expired',
+                completed: task.statut === 'completed'
+            }"
+        >
+            {{ task.statut }}
+        </p>
+    </div>
+
+    <div class="d-flex column-gap-3">
+        <button class="btn btn-danger">
+            <i class="fa-solid fa-trash" (click)="removeTask(task.id)"></i>
+        </button>
+        <button class="btn btn-primary" routerLink="/add-task/{{ task.id }}">
+            <i class="fa-solid fa-pen"></i>
+        </button>
+    </div>
+</div>
